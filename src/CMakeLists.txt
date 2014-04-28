@@ -3,6 +3,7 @@ find_package(Qt5Core)
 
 set(sources
     repo.cpp
+    repostatus.cpp
 )
 
 add_library(libgit SHARED ${sources})

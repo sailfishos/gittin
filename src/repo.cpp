@@ -24,6 +24,7 @@
 #include <QDebug>
 
 #include "repo.h"
+#include "repostatus.h"
 
 namespace LibGit {
 
@@ -42,6 +43,8 @@ public:
 
     QProcess *process;
 };
+
+
 
 Repo::Repo(const QString &path)
     : d(new RepoPrivate)
@@ -75,12 +78,18 @@ void Repo::clean()
     basicCmd("clean");
 }
 
-void Repo::basicCmd(const QString &cmd, const QStringList &params)
+RepoStatus Repo::status() const
+{
+    return RepoStatus(basicCmd("status", QStringList() << "-z"));
+}
+
+QByteArray Repo::basicCmd(const QString &cmd, const QStringList &params) const
 {
     d->process->start(QLatin1String("git"), QStringList() << cmd << params);
     qDebug()<<"executing" << QLatin1String("git") << (QStringList() << cmd << params);
     d->process->waitForFinished();
-    qDebug()<<d->process->readAllStandardOutput();
+    QByteArray output = d->process->readAllStandardOutput();
+    return output;
 }
 
 }

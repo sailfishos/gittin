@@ -20,34 +20,30 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#ifndef REPO_H
-#define REPO_H
-
-#include <QStringList>
+#ifndef REPOSTATUS_H
+#define REPOSTATUS_H
 
 namespace LibGit {
 
-class RepoStatus;
-
-class Repo
+class RepoStatus
 {
 public:
-    explicit Repo(const QString &path);
-    ~Repo();
+    ~RepoStatus();
 
-    static Repo *clone(const QUrl &url, const QString &path, const QString &name = QString());
+    bool hasStagedFiles() const;
+    bool hasDirtyFiles() const;
+    bool hasUntrackedFiles() const;
 
-    void init();
-    void reset();
-    void clean();
-
-    RepoStatus status() const;
+    QStringList stagedFiles() const;
+    QStringList dirtyFiles() const;
+    QStringList untrackedFiles() const;
 
 private:
-    QByteArray basicCmd(const QString &cmd, const QStringList &params = QStringList()) const;
+    RepoStatus(const QByteArray &data);
 
-    class RepoPrivate *const d;
-    friend class RepoPrivate;
+    class RepoStatusPrivate *const d;
+    friend class RepoStatusPrivate;
+    friend class Repo;
 };
 
 }
