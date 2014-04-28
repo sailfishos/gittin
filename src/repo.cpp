@@ -25,6 +25,7 @@
 
 #include "repo.h"
 #include "repostatus.h"
+#include "commit.h"
 
 namespace LibGit {
 
@@ -88,9 +89,11 @@ void Repo::rm(const QString &file)
     basicCmd("rm", QStringList() << file);
 }
 
-void Repo::commit(const QString &message)
+Commit Repo::commit(const QString &message)
 {
     basicCmd("commit", QStringList() << QLatin1String("-m") << message);
+    QString commit = basicCmd("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit");
+    return Commit(commit.split(' ').first());
 }
 
 RepoStatus Repo::status() const

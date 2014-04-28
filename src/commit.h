@@ -20,43 +20,27 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#ifndef REPO_H
-#define REPO_H
+#ifndef COMMIT_H
+#define COMMIT_H
 
-#include <QStringList>
+class QString;
 
-namespace LibGit {
+namespace LibGit
+{
 
-class RepoStatus;
-class Commit;
-class Branch;
-
-class Repo
+class Commit
 {
 public:
-    explicit Repo(const QString &path);
-    ~Repo();
+    explicit Commit(const QString &sha);
+    ~Commit();
 
-    static Repo *clone(const QUrl &url, const QString &path, const QString &name = QString());
-
-    void init();
-    void reset();
-    void clean();
-
-    void checkout(const Commit &commit);
-    void checkout(const Branch branch);
-
-    void add(const QString &file);
-    void rm(const QString &file);
-    Commit commit(const QString &message);
-
-    RepoStatus status() const;
+    QString message() const;
+    QString sha() const;
 
 private:
-    QByteArray basicCmd(const QString &cmd, const QStringList &params = QStringList()) const;
-
-    class RepoPrivate *const d;
-    friend class RepoPrivate;
+    class CommitPrivate *const d;
+    friend class CommitPrivate;
+    friend class Repo;
 };
 
 }
