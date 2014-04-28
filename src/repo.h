@@ -41,6 +41,10 @@ public:
     void reset();
     void clean();
 
+    void add(const QString &file);
+    void rm(const QString &file);
+    void commit(const QString &message);
+
     RepoStatus status() const;
 
 private:

@@ -78,6 +78,21 @@ void Repo::clean()
     basicCmd("clean");
 }
 
+void Repo::add(const QString &file)
+{
+    basicCmd("add", QStringList() << file);
+}
+
+void Repo::rm(const QString &file)
+{
+    basicCmd("rm", QStringList() << file);
+}
+
+void Repo::commit(const QString &message)
+{
+    basicCmd("commit", QStringList() << QLatin1String("-m") << message);
+}
+
 RepoStatus Repo::status() const
 {
     return RepoStatus(basicCmd("status", QStringList() << "-z"));
