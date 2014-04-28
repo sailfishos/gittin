@@ -30,7 +30,8 @@ namespace LibGit {
 class Repo
 {
 public:
-    Repo(const QString &path);
+    explicit Repo(const QString &path);
+    ~Repo();
 
     static Repo *clone(const QUrl &url, const QString &path, const QString &name = QString());
 
@@ -40,6 +41,9 @@ public:
 
 private:
     void basicCmd(const QString &cmd, const QStringList &params = QStringList());
+
+    class RepoPrivate *const d;
+    friend class RepoPrivate;
 };
 
 }

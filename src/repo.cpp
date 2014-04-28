@@ -27,9 +27,21 @@
 
 namespace LibGit {
 
-Repo::Repo(const QString &path)
+class RepoPrivate
 {
+public:
+    QString path;
+};
 
+Repo::Repo(const QString &path)
+    : d(new RepoPrivate)
+{
+    d->path = path;
+}
+
+Repo::~Repo()
+{
+    delete d;
 }
 
 Repo *Repo::clone(const QUrl &url, const QString &path, const QString &name)
