@@ -30,13 +30,24 @@ namespace LibGit {
 class RepoPrivate
 {
 public:
-    QString path;
+    RepoPrivate()
+        : process(new QProcess)
+    {
+    }
+
+    ~RepoPrivate()
+    {
+        delete process;
+    }
+
+    QProcess *process;
 };
 
 Repo::Repo(const QString &path)
     : d(new RepoPrivate)
 {
-    d->path = path;
+    d->process->setWorkingDirectory(path);
+    d->process->setProcessChannelMode(QProcess::ForwardedErrorChannel);
 }
 
 Repo::~Repo()
@@ -66,8 +77,10 @@ void Repo::clean()
 
 void Repo::basicCmd(const QString &cmd, const QStringList &params)
 {
-    int code = QProcess::execute(QLatin1String("git"), QStringList() << cmd << params);
-    qDebug()<<"executed" << QLatin1String("git") << (QStringList() << cmd << params) << "exit code:" << code;
+    d->process->start(QLatin1String("git"), QStringList() << cmd << params);
+    qDebug()<<"executing" << QLatin1String("git") << (QStringList() << cmd << params);
+    d->process->waitForFinished();
+    qDebug()<<d->process->readAllStandardOutput();
 }
 
 }
