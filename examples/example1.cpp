@@ -21,15 +21,26 @@
  */
 
 #include <QCoreApplication>
+#include <QDebug>
 
 #include "src/repo.h"
+#include "src/repostatus.h"
 
 int main(int argv, char **argc)
 {
-    QCoreApplication(argv, argc);
+    QCoreApplication app(argv, argc);
 
     LibGit::Repo repo(".");
-    repo.init();
+
+    QString action = app.arguments().size() > 1 ? app.arguments().at(1) : QString();
+    if (action == QLatin1String("init")) {
+        repo.init();
+    } else if (action == QLatin1String("status")) {
+        LibGit::RepoStatus status = repo.status();
+        qDebug()<<"untracked:" << status.untrackedFiles();
+        qDebug()<<"staged:" << status.stagedFiles();
+        qDebug()<<"dirty" << status.dirtyFiles();
+    }
 
     return 0;
 }
