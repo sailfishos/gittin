@@ -118,7 +118,22 @@ QList<Tag> Repo::tags() const
     return list;
 }
 
-Command *Repo::command(const QString &cmd, const QStringList &params)
+QString Repo::configValue(const QString &name, const QString &defaultValue) const
+{
+    Command *cmd = command("config", QStringList() << name);
+    if (cmd->exitCode() == 0) {
+        return cmd->stdout();
+    }
+
+    return defaultValue;
+}
+
+void Repo::setConfigValue(const QString &name, const QString &value)
+{
+    command("config", QStringList() << name << value);
+}
+
+Command *Repo::command(const QString &cmd, const QStringList &params) const
 {
     QProcess *proc = new QProcess;
     proc->setWorkingDirectory(d->path);

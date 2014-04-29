@@ -57,7 +57,10 @@ public:
     RepoStatus status() const;
     QList<Tag> tags() const;
 
-    Command *command(const QString &cmd, const QStringList &params = QStringList());
+    QString configValue(const QString &name, const QString &defaultValue = QString()) const;
+    void setConfigValue(const QString &name, const QString &value);
+
+    Command *command(const QString &cmd, const QStringList &params = QStringList()) const;
 
 private:
     QByteArray basicCmd(const QString &cmd, const QStringList &params = QStringList()) const;
