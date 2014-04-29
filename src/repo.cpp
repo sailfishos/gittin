@@ -22,6 +22,7 @@
 
 #include <QProcess>
 #include <QDebug>
+#include <QSharedPointer>
 
 #include "repo.h"
 #include "repostatus.h"
@@ -120,7 +121,7 @@ QList<Tag> Repo::tags() const
 
 QString Repo::configValue(const QString &name, const QString &defaultValue) const
 {
-    Command *cmd = command("config", QStringList() << name);
+    QSharedPointer<Command> cmd = command("config", QStringList() << name);
     if (cmd->exitCode() == 0) {
         return cmd->stdout();
     }
@@ -133,7 +134,7 @@ void Repo::setConfigValue(const QString &name, const QString &value)
     command("config", QStringList() << name << value);
 }
 
-Command *Repo::command(const QString &cmd, const QStringList &params) const
+QSharedPointer<Command> Repo::command(const QString &cmd, const QStringList &params) const
 {
     QProcess *proc = new QProcess;
     proc->setWorkingDirectory(d->path);
@@ -141,7 +142,7 @@ Command *Repo::command(const QString &cmd, const QStringList &params) const
     proc->setProgram("git");
     proc->setArguments(QStringList() << cmd << params);
 
-    Command *comm = new Command(proc);
+    QSharedPointer<Command> comm(new Command(proc));
     proc->start();
     proc->waitForFinished();
     return comm;

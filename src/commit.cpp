@@ -23,6 +23,7 @@
 #include <QSharedData>
 #include <QString>
 #include <QDebug>
+#include <QSharedPointer>
 
 #include "commit.h"
 #include "command.h"
@@ -49,7 +50,7 @@ public:
 Commit::Commit(Repo *repo, const QString &sha)
       : d(new CommitPrivate(repo, sha))
 {
-    Command *cmd = repo->command("log", QStringList() << "-n1" << "--pretty=format:%s" << sha);
+    QSharedPointer<Command> cmd = repo->command("log", QStringList() << "-n1" << "--pretty=format:%s" << sha);
     d->message = cmd->stdout();
 }
 

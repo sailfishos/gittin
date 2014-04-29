@@ -22,6 +22,7 @@
 
 #include <QSharedData>
 #include <QString>
+#include <QSharedPointer>
 
 #include "branch.h"
 #include "commit.h"
@@ -63,7 +64,7 @@ Branch &Branch::operator=(const Branch &other)
 
 bool Branch::exists() const
 {
-    Command *cmd = d->repo->command("show-ref", QStringList() << "--verify" << "--quiet" << QString("refs/heads/%1").arg(d->name));
+    QSharedPointer<Command> cmd = d->repo->command("show-ref", QStringList() << "--verify" << "--quiet" << QString("refs/heads/%1").arg(d->name));
     return cmd->exitCode() == 0;
 }
 
@@ -74,7 +75,7 @@ QString Branch::name() const
 
 Commit Branch::head(unsigned int n) const
 {
-    Command *cmd = d->repo->command("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit" << QString("%1~%2").arg(d->name).arg(QString::number(n)));
+    QSharedPointer<Command> cmd = d->repo->command("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit" << QString("%1~%2").arg(d->name).arg(QString::number(n)));
     return Commit(d->repo, cmd->stdout().split(' ').first());
 }
 
