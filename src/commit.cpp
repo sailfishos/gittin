@@ -22,6 +22,7 @@
 
 #include <QSharedData>
 #include <QString>
+#include <QDebug>
 
 #include "commit.h"
 
@@ -71,6 +72,12 @@ QString Commit::message() const
 QString Commit::sha() const
 {
     return d->sha;
+}
+
+QDebug operator<<(QDebug dbg, const Commit &t)
+{
+    dbg.nospace() << "Commit(" << t.sha() << " " << t.message() << ")";
+    return dbg.space();
 }
 
 }

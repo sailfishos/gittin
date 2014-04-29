@@ -74,7 +74,8 @@ QString Branch::name() const
 
 Commit Branch::head(unsigned int n) const
 {
-
+    Command *cmd = d->repo->command("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit" << QString("%1~%2").arg(d->name).arg(QString::number(n)));
+    return Commit(d->repo, cmd->stdout().split(' ').first());
 }
 
 }

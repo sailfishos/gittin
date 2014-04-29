@@ -49,6 +49,8 @@ private:
     QSharedDataPointer<CommitPrivate> d;
 };
 
+QDebug operator<<(QDebug dbg, const Commit &t);
+
 }
 
 #endif

@@ -26,6 +26,7 @@
 #include "src/repo.h"
 #include "src/repostatus.h"
 #include "src/branch.h"
+#include "src/commit.h"
 
 int main(int argv, char **argc)
 {
@@ -46,6 +47,9 @@ int main(int argv, char **argc)
     } else if (action == QLatin1String("check_branch")) {
         LibGit::Branch branch(&repo, app.arguments().at(2));
         qDebug() << branch.exists();
+    } else if (action == QLatin1String("commit")) {
+        LibGit::Branch branch(&repo, app.arguments().at(2));
+        qDebug() << branch.head(app.arguments().at(3).toInt());
     }
 
     return 0;
