@@ -26,6 +26,7 @@
 #include "branch.h"
 #include "commit.h"
 #include "repo.h"
+#include "command.h"
 
 namespace LibGit
 {
@@ -62,7 +63,8 @@ Branch &Branch::operator=(const Branch &other)
 
 bool Branch::exists() const
 {
-
+    Command *cmd = d->repo->command("show-ref", QStringList() << "--verify" << "--quiet" << QString("refs/heads/%1").arg(d->name));
+    return cmd->exitCode() == 0;
 }
 
 QString Branch::name() const

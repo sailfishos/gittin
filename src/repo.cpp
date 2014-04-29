@@ -26,6 +26,7 @@
 #include "repo.h"
 #include "repostatus.h"
 #include "commit.h"
+#include "command.h"
 
 namespace LibGit {
 
@@ -43,6 +44,7 @@ public:
     }
 
     QProcess *process;
+    QString path;
 };
 
 
@@ -50,6 +52,7 @@ public:
 Repo::Repo(const QString &path)
     : d(new RepoPrivate)
 {
+    d->path = path;
     d->process->setWorkingDirectory(path);
     d->process->setProcessChannelMode(QProcess::ForwardedErrorChannel);
 }
@@ -113,6 +116,20 @@ QList<Tag> Repo::tags() const
     }
 
     return list;
+}
+
+Command *Repo::command(const QString &cmd, const QStringList &params)
+{
+    QProcess *proc = new QProcess;
+    proc->setWorkingDirectory(d->path);
+    proc->setProcessChannelMode(QProcess::ForwardedErrorChannel);
+    proc->setProgram("git");
+    proc->setArguments(QStringList() << cmd << params);
+
+    Command *comm = new Command(proc);
+    proc->start();
+    proc->waitForFinished();
+    return comm;
 }
 
 QByteArray Repo::basicCmd(const QString &cmd, const QStringList &params) const

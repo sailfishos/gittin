@@ -7,6 +7,7 @@ set(sources
     commit.cpp
     branch.cpp
     tag.cpp
+    command.cpp
 )
 
 add_library(libgit SHARED ${sources})

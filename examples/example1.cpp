@@ -25,6 +25,7 @@
 
 #include "src/repo.h"
 #include "src/repostatus.h"
+#include "src/branch.h"
 
 int main(int argv, char **argc)
 {
@@ -42,6 +43,9 @@ int main(int argv, char **argc)
         qDebug()<<"dirty" << status.dirtyFiles();
     } else if (action == QLatin1String("show_tags")) {
         qDebug() << repo.tags();
+    } else if (action == QLatin1String("check_branch")) {
+        LibGit::Branch branch(&repo, app.arguments().at(2));
+        qDebug() << branch.exists();
     }
 
     return 0;

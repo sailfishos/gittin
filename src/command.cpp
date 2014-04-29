@@ -20,52 +20,41 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#ifndef REPO_H
-#define REPO_H
+#include <QProcess>
 
-#include <QStringList>
+#include "command.h"
 
-#include "tag.h"
+namespace LibGit
+{
 
-namespace LibGit {
-
-class RepoStatus;
-class Commit;
-class Branch;
-class Tag;
-class Command;
-
-class Repo
+class CommandPrivate
 {
 public:
-    explicit Repo(const QString &path);
-    ~Repo();
-
-    static Repo *clone(const QUrl &url, const QString &path, const QString &name = QString());
-
-    void init();
-    void reset();
-    void clean();
-
-    void checkout(const Commit &commit);
-    void checkout(const Branch branch);
-
-    void add(const QString &file);
-    void rm(const QString &file);
-    Commit commit(const QString &message);
-
-    RepoStatus status() const;
-    QList<Tag> tags() const;
-
-    Command *command(const QString &cmd, const QStringList &params = QStringList());
-
-private:
-    QByteArray basicCmd(const QString &cmd, const QStringList &params = QStringList()) const;
-
-    class RepoPrivate *const d;
-    friend class RepoPrivate;
+    QProcess *process;
 };
 
+
+
+Command::Command(QProcess *proc)
+       : d(new CommandPrivate)
+{
+    d->process = proc;
 }
 
-#endif
+Command::~Command()
+{
+    delete d->process;
+    delete d;
+}
+
+QByteArray Command::stdout() const
+{
+    return d->process->readAllStandardOutput();
+}
+
+int Command::exitCode() const
+{
+    return d->process->exitCode();
+}
+
+}
