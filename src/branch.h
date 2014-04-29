@@ -30,13 +30,14 @@ class QString;
 namespace LibGit
 {
 
+class Repo;
 class Commit;
 class BranchPrivate;
 
 class Branch
 {
 public:
-    explicit Branch(const QString &name);
+    explicit Branch(Repo *repo, const QString &name);
     Branch(const Branch &other);
     ~Branch();
 

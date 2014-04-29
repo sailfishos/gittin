@@ -33,13 +33,15 @@ namespace LibGit
 class BranchPrivate : public QSharedData
 {
 public:
+    Repo *repo;
     QString name;
 };
 
 
-Branch::Branch(const QString &name)
+Branch::Branch(Repo *repo, const QString &name)
       : d(new BranchPrivate)
 {
+    d->repo = repo;
     d->name = name;
 }
 

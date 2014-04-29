@@ -93,7 +93,7 @@ Commit Repo::commit(const QString &message)
 {
     basicCmd("commit", QStringList() << QLatin1String("-m") << message);
     QString commit = basicCmd("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit");
-    return Commit(commit.split(' ').first());
+    return Commit(this, commit.split(' ').first());
 }
 
 RepoStatus Repo::status() const
@@ -108,7 +108,8 @@ QList<Tag> Repo::tags() const
     QString out = basicCmd("tag", QStringList());
     QStringList names = out.split("\n");
     for (int i = 0; i < names.size() - 1; ++i) {
-        list.append(Tag(names.at(i)));
+        // FIXME: Remove this const_cast somehow
+        list.append(Tag(const_cast<Repo *>(this), names.at(i)));
     }
 
     return list;

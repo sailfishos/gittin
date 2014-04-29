@@ -31,18 +31,20 @@ namespace LibGit
 class CommitPrivate : public QSharedData
 {
 public:
-    CommitPrivate(const QString &s)
-        : sha(s)
+    CommitPrivate(Repo *r, const QString &s)
+        : repo(r)
+        , sha(s)
     {
     }
 
+    Repo *repo;
     QString message;
     QString sha;
 };
 
 
-Commit::Commit(const QString &sha)
-      : d(new CommitPrivate(sha))
+Commit::Commit(Repo *repo, const QString &sha)
+      : d(new CommitPrivate(repo, sha))
 {
 }
 

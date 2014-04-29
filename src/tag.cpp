@@ -32,8 +32,9 @@ namespace LibGit
 class TagPrivate : public QSharedData
 {
 public:
-    TagPrivate(const QString &n)
-        : name(n)
+    TagPrivate(Repo *r, const QString &n)
+        : repo(r)
+        , name(n)
     {
     }
 
@@ -42,12 +43,13 @@ public:
     {
     }
 
+    Repo *repo;
     QString name;
 };
 
 
-Tag::Tag(const QString &name)
-   : d(new TagPrivate(name))
+Tag::Tag(Repo *repo, const QString &name)
+   : d(new TagPrivate(repo, name))
 {
 
 }

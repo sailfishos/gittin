@@ -30,12 +30,13 @@ class QString;
 namespace LibGit
 {
 
+class Repo;
 class TagPrivate;
 
 class Tag
 {
 public:
-    explicit Tag(const QString &name);
+    explicit Tag(Repo *repo, const QString &name);
     Tag(const Tag &other);
     ~Tag();
 

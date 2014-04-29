@@ -30,12 +30,13 @@ class QString;
 namespace LibGit
 {
 
+class Repo;
 class CommitPrivate;
 
 class Commit
 {
 public:
-    explicit Commit(const QString &sha);
+    explicit Commit(Repo *repo, const QString &sha);
     Commit(const Commit &commit);
     ~Commit();
 
