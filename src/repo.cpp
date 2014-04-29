@@ -28,6 +28,7 @@
 #include "repostatus.h"
 #include "commit.h"
 #include "command.h"
+#include "branch.h"
 
 namespace LibGit {
 
@@ -81,6 +82,21 @@ void Repo::reset()
 void Repo::clean()
 {
     basicCmd("clean");
+}
+
+void Repo::checkout(const Commit &commit)
+{
+    basicCmd("checkout", QStringList() << commit.sha());
+}
+
+void Repo::checkout(const Branch &branch)
+{
+    basicCmd("checkout", QStringList() << branch.name());
+}
+
+void Repo::checkout(const Tag &tag)
+{
+    basicCmd("checkout", QStringList() << tag.name());
 }
 
 void Repo::add(const QString &file)

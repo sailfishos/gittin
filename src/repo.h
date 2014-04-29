@@ -48,7 +48,8 @@ public:
     void clean();
 
     void checkout(const Commit &commit);
-    void checkout(const Branch branch);
+    void checkout(const Branch &branch);
+    void checkout(const Tag &tag);
 
     void add(const QString &file);
     void rm(const QString &file);
