@@ -101,6 +101,19 @@ RepoStatus Repo::status() const
     return RepoStatus(basicCmd("status", QStringList() << "-z"));
 }
 
+QList<Tag> Repo::tags() const
+{
+    QList<Tag> list;
+
+    QString out = basicCmd("tag", QStringList());
+    QStringList names = out.split("\n");
+    for (int i = 0; i < names.size() - 1; ++i) {
+        list.append(Tag(names.at(i)));
+    }
+
+    return list;
+}
+
 QByteArray Repo::basicCmd(const QString &cmd, const QStringList &params) const
 {
     d->process->start(QLatin1String("git"), QStringList() << cmd << params);

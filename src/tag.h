@@ -20,29 +20,35 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#include <QCoreApplication>
-#include <QDebug>
+#ifndef TAG_H
+#define TAG_H
 
-#include "src/repo.h"
-#include "src/repostatus.h"
+#include <QSharedDataPointer>
 
-int main(int argv, char **argc)
+class QString;
+
+namespace LibGit
 {
-    QCoreApplication app(argv, argc);
 
-    LibGit::Repo repo(".");
+class TagPrivate;
 
-    QString action = app.arguments().size() > 1 ? app.arguments().at(1) : QString();
-    if (action == QLatin1String("init")) {
-        repo.init();
-    } else if (action == QLatin1String("status")) {
-        LibGit::RepoStatus status = repo.status();
-        qDebug()<<"untracked:" << status.untrackedFiles();
-        qDebug()<<"staged:" << status.stagedFiles();
-        qDebug()<<"dirty" << status.dirtyFiles();
-    } else if (action == QLatin1String("show_tags")) {
-        qDebug() << repo.tags();
-    }
+class Tag
+{
+public:
+    explicit Tag(const QString &name);
+    Tag(const Tag &other);
+    ~Tag();
 
-    return 0;
+    Tag &operator=(const Tag &other);
+
+    QString name() const;
+
+private:
+    QSharedDataPointer<TagPrivate> d;
+};
+
+QDebug operator<<(QDebug dbg, const Tag &t);
+
 }
+
+#endif

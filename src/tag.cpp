@@ -20,29 +20,63 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#include <QCoreApplication>
+#include "tag.h"
+
+#include <QSharedData>
+#include <QString>
 #include <QDebug>
 
-#include "src/repo.h"
-#include "src/repostatus.h"
-
-int main(int argv, char **argc)
+namespace LibGit
 {
-    QCoreApplication app(argv, argc);
 
-    LibGit::Repo repo(".");
-
-    QString action = app.arguments().size() > 1 ? app.arguments().at(1) : QString();
-    if (action == QLatin1String("init")) {
-        repo.init();
-    } else if (action == QLatin1String("status")) {
-        LibGit::RepoStatus status = repo.status();
-        qDebug()<<"untracked:" << status.untrackedFiles();
-        qDebug()<<"staged:" << status.stagedFiles();
-        qDebug()<<"dirty" << status.dirtyFiles();
-    } else if (action == QLatin1String("show_tags")) {
-        qDebug() << repo.tags();
+class TagPrivate : public QSharedData
+{
+public:
+    TagPrivate(const QString &n)
+        : name(n)
+    {
     }
 
-    return 0;
+    TagPrivate(const TagPrivate &o)
+        : name(o.name)
+    {
+    }
+
+    QString name;
+};
+
+
+Tag::Tag(const QString &name)
+   : d(new TagPrivate(name))
+{
+
+}
+
+Tag::Tag(const Tag &other)
+   : d(other.d)
+{
+}
+
+Tag::~Tag()
+{
+}
+
+Tag &Tag::operator=(const Tag &other)
+{
+    d = other.d;
+    return *this;
+}
+
+QString Tag::name() const
+{
+    return d->name;
+}
+
+
+QDebug operator<<(QDebug dbg, const Tag &t)
+{
+    dbg.nospace() << "Tag(" << t.name() << ")";
+    return dbg.space();
+}
+
 }

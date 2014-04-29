@@ -6,6 +6,7 @@ set(sources
     repostatus.cpp
     commit.cpp
     branch.cpp
+    tag.cpp
 )
 
 add_library(libgit SHARED ${sources})

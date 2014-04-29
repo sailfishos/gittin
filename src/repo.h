@@ -25,11 +25,14 @@
 
 #include <QStringList>
 
+#include "tag.h"
+
 namespace LibGit {
 
 class RepoStatus;
 class Commit;
 class Branch;
+class Tag;
 
 class Repo
 {
@@ -51,6 +54,7 @@ public:
     Commit commit(const QString &message);
 
     RepoStatus status() const;
+    QList<Tag> tags() const;
 
 private:
     QByteArray basicCmd(const QString &cmd, const QStringList &params = QStringList()) const;
