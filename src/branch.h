@@ -23,18 +23,31 @@
 #ifndef BRANCH_H
 #define BRANCH_H
 
+#include <QSharedDataPointer>
+
 class QString;
 
 namespace LibGit
 {
 
 class Commit;
+class BranchPrivate;
 
 class Branch
 {
 public:
+    explicit Branch(const QString &name);
+    Branch(const Branch &other);
+    ~Branch();
+
+    Branch &operator=(const Branch &other);
+
+    bool exists() const;
     QString name() const;
     Commit head(unsigned int n = 0) const;
+
+private:
+    QSharedDataPointer<BranchPrivate> d;
 };
 
 }

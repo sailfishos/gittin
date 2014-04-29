@@ -20,9 +20,57 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
+#include <QSharedData>
+#include <QString>
+
 #include "branch.h"
+#include "commit.h"
+#include "repo.h"
 
 namespace LibGit
 {
+
+class BranchPrivate : public QSharedData
+{
+public:
+    QString name;
+};
+
+
+Branch::Branch(const QString &name)
+      : d(new BranchPrivate)
+{
+    d->name = name;
+}
+
+Branch::Branch(const Branch &other)
+      : d(other.d)
+{
+}
+
+Branch::~Branch()
+{
+}
+
+Branch &Branch::operator=(const Branch &other)
+{
+    d = other.d;
+    return *this;
+}
+
+bool Branch::exists() const
+{
+
+}
+
+QString Branch::name() const
+{
+    return d->name;
+}
+
+Commit Branch::head(unsigned int n) const
+{
+
+}
 
 }
