@@ -23,12 +23,19 @@
 #ifndef REPOSTATUS_H
 #define REPOSTATUS_H
 
+#include <QSharedDataPointer>
+
 namespace LibGit {
+
+class RepoStatusPrivate;
 
 class RepoStatus
 {
 public:
+    RepoStatus(const RepoStatus &other);
     ~RepoStatus();
+
+    RepoStatus &operator=(const RepoStatus &other);
 
     bool hasStagedFiles() const;
     bool hasDirtyFiles() const;
@@ -41,8 +48,7 @@ public:
 private:
     RepoStatus(const QByteArray &data);
 
-    class RepoStatusPrivate *const d;
-    friend class RepoStatusPrivate;
+    QSharedDataPointer<RepoStatusPrivate> d;
     friend class Repo;
 };
 

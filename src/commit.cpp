@@ -20,6 +20,7 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
+#include <QSharedData>
 #include <QString>
 
 #include "commit.h"
@@ -27,7 +28,7 @@
 namespace LibGit
 {
 
-class CommitPrivate
+class CommitPrivate : public QSharedData
 {
 public:
     CommitPrivate(const QString &s)
@@ -45,9 +46,19 @@ Commit::Commit(const QString &sha)
 {
 }
 
+Commit::Commit(const Commit &other)
+      : d(other.d)
+{
+}
+
 Commit::~Commit()
 {
-    delete d;
+}
+
+Commit &Commit::operator=(const Commit &other)
+{
+    d = other.d;
+    return *this;
 }
 
 QString Commit::message() const

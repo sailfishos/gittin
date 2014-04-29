@@ -20,6 +20,7 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
+#include <QSharedData>
 #include <QStringList>
 #include <QDebug>
 
@@ -27,7 +28,7 @@
 
 namespace LibGit {
 
-class RepoStatusPrivate
+class RepoStatusPrivate : public QSharedData
 {
 public:
     void parse(const QByteArray &data)
@@ -60,9 +61,19 @@ RepoStatus::RepoStatus(const QByteArray &data)
     d->parse(data);
 }
 
+RepoStatus::RepoStatus(const RepoStatus &other)
+          : d(other.d)
+{
+}
+
 RepoStatus::~RepoStatus()
 {
-    delete d;
+}
+
+RepoStatus &RepoStatus::operator=(const RepoStatus &other)
+{
+    d = other.d;
+    return *this;
 }
 
 bool RepoStatus::hasStagedFiles() const

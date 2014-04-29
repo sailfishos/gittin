@@ -23,24 +23,29 @@
 #ifndef COMMIT_H
 #define COMMIT_H
 
+#include <QSharedDataPointer>
+
 class QString;
 
 namespace LibGit
 {
 
+class CommitPrivate;
+
 class Commit
 {
 public:
     explicit Commit(const QString &sha);
+    Commit(const Commit &commit);
     ~Commit();
+
+    Commit &operator=(const Commit &other);
 
     QString message() const;
     QString sha() const;
 
 private:
-    class CommitPrivate *const d;
-    friend class CommitPrivate;
-    friend class Repo;
+    QSharedDataPointer<CommitPrivate> d;
 };
 
 }
