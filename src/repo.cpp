@@ -116,6 +116,12 @@ Commit Repo::commit(const QString &message)
     return Commit(this, commit.split(' ').first());
 }
 
+Tag Repo::tag(const QString &name)
+{
+    basicCmd("tag", QStringList() << name);
+    return Tag(this, name);
+}
+
 RepoStatus Repo::status() const
 {
     return RepoStatus(basicCmd("status", QStringList() << "-z"));

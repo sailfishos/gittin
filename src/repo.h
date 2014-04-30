@@ -54,6 +54,7 @@ public:
     void add(const QString &file);
     void rm(const QString &file);
     Commit commit(const QString &message);
+    Tag tag(const QString &name);
 
     RepoStatus status() const;
     QList<Tag> tags() const;
