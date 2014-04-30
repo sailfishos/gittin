@@ -117,7 +117,7 @@ void Repo::rm(const QString &file)
 Commit Repo::commit(const QString &message)
 {
     basicCmd("commit", QStringList() << QLatin1String("-m") << message);
-    QString commit = basicCmd("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit");
+    QByteArray commit = basicCmd("log", QStringList() << "-n1" << "--oneline" << "--no-abbrev-commit");
     return Commit(this, commit.split(' ').first());
 }
 

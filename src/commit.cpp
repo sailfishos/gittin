@@ -35,7 +35,7 @@ namespace LibGit
 class CommitPrivate : public QSharedData
 {
 public:
-    CommitPrivate(Repo *r, const QString &s)
+    CommitPrivate(Repo *r, const QByteArray &s)
         : repo(r)
         , sha(s)
     {
@@ -43,11 +43,11 @@ public:
 
     Repo *repo;
     QString message;
-    QString sha;
+    QByteArray sha;
 };
 
 
-Commit::Commit(Repo *repo, const QString &sha)
+Commit::Commit(Repo *repo, const QByteArray &sha)
       : d(new CommitPrivate(repo, sha))
 {
     QSharedPointer<Command> cmd = repo->command("log", QStringList() << "-n1" << "--pretty=format:%s" << sha);
@@ -74,7 +74,7 @@ QString Commit::message() const
     return d->message;
 }
 
-QString Commit::sha() const
+QByteArray Commit::sha() const
 {
     return d->sha;
 }

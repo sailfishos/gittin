@@ -36,14 +36,14 @@ class CommitPrivate;
 class Commit
 {
 public:
-    explicit Commit(Repo *repo, const QString &sha);
+    explicit Commit(Repo *repo, const QByteArray &sha);
     Commit(const Commit &commit);
     ~Commit();
 
     Commit &operator=(const Commit &other);
 
     QString message() const;
-    QString sha() const;
+    QByteArray sha() const;
 
 private:
     QSharedDataPointer<CommitPrivate> d;
