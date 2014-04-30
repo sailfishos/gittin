@@ -12,3 +12,5 @@ set(sources
 
 add_library(libgit SHARED ${sources})
 qt5_use_modules(libgit Core)
+
+install(TARGETS libgit LIBRARY DESTINATION lib)
