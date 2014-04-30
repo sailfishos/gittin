@@ -44,6 +44,9 @@ public:
 
     QString message() const;
     QByteArray sha() const;
+    QString authorName() const;
+    QString authorEmail() const;
+    QString diff() const;
 
 private:
     QSharedDataPointer<CommitPrivate> d;

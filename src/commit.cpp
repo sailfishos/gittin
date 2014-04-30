@@ -44,6 +44,9 @@ public:
     Repo *repo;
     QString message;
     QByteArray sha;
+    QString authorName;
+    QString authorEmail;
+    QString diff;
 };
 
 
@@ -52,6 +55,15 @@ Commit::Commit(Repo *repo, const QByteArray &sha)
 {
     QSharedPointer<Command> cmd = repo->command("log", QStringList() << "-n1" << "--pretty=format:%s" << sha);
     d->message = cmd->stdout();
+
+    cmd = repo->command("show", QStringList() << "--pretty=format:%an;%ce" << sha);
+    QByteArray out = cmd->stdout();
+
+    int commaPos = out.indexOf(';');
+    int newlinePos = out.indexOf('\n');
+    d->authorName = out.left(commaPos);
+    d->authorEmail = out.mid(commaPos + 1, newlinePos - commaPos - 1);
+    d->diff = out.mid(newlinePos + 1);
 }
 
 Commit::Commit(const Commit &other)
@@ -77,6 +89,21 @@ QString Commit::message() const
 QByteArray Commit::sha() const
 {
     return d->sha;
+}
+
+QString Commit::authorName() const
+{
+    return d->authorName;
+}
+
+QString Commit::authorEmail() const
+{
+    return d->authorEmail;
+}
+
+QString Commit::diff() const
+{
+    return d->diff;
 }
 
 QDebug operator<<(QDebug dbg, const Commit &t)
