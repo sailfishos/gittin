@@ -50,6 +50,8 @@ int main(int argv, char **argc)
     } else if (action == QLatin1String("commit")) {
         LibGit::Branch branch(&repo, app.arguments().at(2));
         qDebug() << branch.head(app.arguments().at(3).toInt());
+    } else if (action == QLatin1String("hash-object")) {
+        qDebug() << repo.hashObject(app.arguments().at(2));
     }
 
     return 0;

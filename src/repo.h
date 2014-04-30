@@ -51,6 +51,8 @@ public:
     void checkout(const Branch &branch);
     void checkout(const Tag &tag);
 
+    QByteArray hashObject(const QString &path) const;
+
     void add(const QString &file);
     void rm(const QString &file);
     Commit commit(const QString &message);

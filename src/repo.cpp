@@ -99,6 +99,11 @@ void Repo::checkout(const Tag &tag)
     basicCmd("checkout", QStringList() << tag.name());
 }
 
+QByteArray Repo::hashObject(const QString &path) const
+{
+    return basicCmd("hash-object", QStringList() << path).left(40); //strip the newline
+}
+
 void Repo::add(const QString &file)
 {
     basicCmd("add", QStringList() << file);
