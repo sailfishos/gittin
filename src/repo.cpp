@@ -69,6 +69,11 @@ Repo *Repo::clone(const QUrl &url, const QString &path, const QString &name)
     return 0;
 }
 
+QString Repo::path() const
+{
+    return d->path;
+}
+
 void Repo::init()
 {
     basicCmd("init");

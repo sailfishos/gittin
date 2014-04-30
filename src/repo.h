@@ -43,6 +43,8 @@ public:
 
     static Repo *clone(const QUrl &url, const QString &path, const QString &name = QString());
 
+    QString path() const;
+
     void init();
     void reset();
     void clean();
