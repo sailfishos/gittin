@@ -45,7 +45,7 @@ public:
 
     QString path() const;
 
-    void init();
+    bool init();
     void reset();
     void clean();
 

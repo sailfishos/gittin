@@ -74,9 +74,10 @@ QString Repo::path() const
     return d->path;
 }
 
-void Repo::init()
+bool Repo::init()
 {
-    basicCmd("init");
+    QSharedPointer<Command> cmd = command("init");
+    return !cmd->exitCode();
 }
 
 void Repo::reset()
