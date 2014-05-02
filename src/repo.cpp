@@ -80,14 +80,19 @@ bool Repo::init()
     return !cmd->exitCode();
 }
 
-void Repo::reset()
+void Repo::reset(ResetOptions options)
 {
-    basicCmd("reset");
+    QStringList opts;
+    if (options & ResetOptions::Hard) opts << "--hard";
+    basicCmd("reset", opts);
 }
 
-void Repo::clean()
+void Repo::clean(CleanOptions options)
 {
-    basicCmd("clean");
+    QStringList opts;
+    if (options & CleanOptions::Force) opts << "-f";
+    if (options & CleanOptions::RemoveDirectories) opts << "-d";
+    basicCmd("clean", opts);
 }
 
 void Repo::checkout(const Commit &commit)

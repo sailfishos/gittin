@@ -35,6 +35,19 @@ class Branch;
 class Tag;
 class Command;
 
+enum class CleanOptions
+{
+    None = 0,
+    Force = 1,
+    RemoveDirectories = 2
+};
+
+enum class ResetOptions
+{
+    None = 0,
+    Hard = 1
+};
+
 class Repo
 {
 public:
@@ -46,8 +59,8 @@ public:
     QString path() const;
 
     bool init();
-    void reset();
-    void clean();
+    void reset(ResetOptions options);
+    void clean(CleanOptions options);
 
     void checkout(const Commit &commit);
     void checkout(const Branch &branch);
@@ -74,6 +87,13 @@ private:
     class RepoPrivate *const d;
     friend class RepoPrivate;
 };
+
+#define DECLARE_FLAGS(Flags) \
+inline bool operator&(Flags a, Flags b) { return (int)a & (int)b; } \
+inline Flags operator|(Flags a, Flags b) { return (Flags)((int)a | (int)b); }
+
+DECLARE_FLAGS(CleanOptions)
+DECLARE_FLAGS(ResetOptions)
 
 }
 
