@@ -80,18 +80,21 @@ bool Repo::init()
     return !cmd->exitCode();
 }
 
-void Repo::reset(ResetOptions options)
+void Repo::reset(ResetOptions options, const QString &object)
 {
     QStringList opts;
     if (options & ResetOptions::Hard) opts << "--hard";
+    opts << object;
     basicCmd("reset", opts);
 }
 
-void Repo::clean(CleanOptions options)
+void Repo::clean(CleanOptions options, const QString &path)
 {
     QStringList opts;
     if (options & CleanOptions::Force) opts << "-f";
     if (options & CleanOptions::RemoveDirectories) opts << "-d";
+    if (options & CleanOptions::IgnoreIgnores) opts << "-x";
+    if (!path.isEmpty()) opts << "--" << path;
     basicCmd("clean", opts);
 }
 

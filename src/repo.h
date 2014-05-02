@@ -39,7 +39,8 @@ enum class CleanOptions
 {
     None = 0,
     Force = 1,
-    RemoveDirectories = 2
+    RemoveDirectories = 2,
+    IgnoreIgnores = 4
 };
 
 enum class ResetOptions
@@ -65,8 +66,8 @@ public:
     QString path() const;
 
     bool init();
-    void reset(ResetOptions options);
-    void clean(CleanOptions options);
+    void reset(ResetOptions options, const QString &object = QString());
+    void clean(CleanOptions options, const QString &path = QString());
 
     void checkout(const Commit &commit, CheckoutOptions options);
     void checkout(const Branch &branch, CheckoutOptions options);
