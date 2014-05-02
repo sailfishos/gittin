@@ -106,6 +106,11 @@ QString Commit::diff() const
     return d->diff;
 }
 
+void Commit::addNote(const QString &msg)
+{
+    d->repo->command("notes", QStringList() << "add" << "-m" << msg << d->sha);
+}
+
 QDebug operator<<(QDebug dbg, const Commit &t)
 {
     dbg.nospace() << "Commit(" << t.sha() << " " << t.message() << ")";

@@ -48,6 +48,8 @@ public:
     QString authorEmail() const;
     QString diff() const;
 
+    void addNote(const QString &message);
+
 private:
     QSharedDataPointer<CommitPrivate> d;
 };
