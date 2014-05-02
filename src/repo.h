@@ -48,6 +48,12 @@ enum class ResetOptions
     Hard = 1
 };
 
+enum class CheckoutOptions
+{
+    None = 0,
+    Force = 1
+};
+
 class Repo
 {
 public:
@@ -62,9 +68,10 @@ public:
     void reset(ResetOptions options);
     void clean(CleanOptions options);
 
-    void checkout(const Commit &commit);
-    void checkout(const Branch &branch);
-    void checkout(const Tag &tag);
+    void checkout(const Commit &commit, CheckoutOptions options);
+    void checkout(const Branch &branch, CheckoutOptions options);
+    void checkout(const Tag &tag, CheckoutOptions options);
+    void checkout(const QString &object, CheckoutOptions options);
 
     QByteArray hashObject(const QString &path) const;
 
@@ -94,6 +101,7 @@ inline Flags operator|(Flags a, Flags b) { return (Flags)((int)a | (int)b); }
 
 DECLARE_FLAGS(CleanOptions)
 DECLARE_FLAGS(ResetOptions)
+DECLARE_FLAGS(CheckoutOptions)
 
 }
 

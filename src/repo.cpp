@@ -95,19 +95,27 @@ void Repo::clean(CleanOptions options)
     basicCmd("clean", opts);
 }
 
-void Repo::checkout(const Commit &commit)
+void Repo::checkout(const Commit &commit, CheckoutOptions options)
 {
-    basicCmd("checkout", QStringList() << commit.sha());
+    checkout(commit.sha(), options);
 }
 
-void Repo::checkout(const Branch &branch)
+void Repo::checkout(const Branch &branch, CheckoutOptions options)
 {
-    basicCmd("checkout", QStringList() << branch.name());
+    checkout(branch.name(), options);
 }
 
-void Repo::checkout(const Tag &tag)
+void Repo::checkout(const Tag &tag, CheckoutOptions options)
 {
-    basicCmd("checkout", QStringList() << tag.name());
+    checkout(tag.name(), options);
+}
+
+void Repo::checkout(const QString &object, CheckoutOptions options)
+{
+    QStringList opts;
+    if (options & CheckoutOptions::Force) opts << "-f";
+    opts << object;
+    basicCmd("checkout", opts);
 }
 
 QByteArray Repo::hashObject(const QString &path) const
