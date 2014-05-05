@@ -11,7 +11,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libgit.pc DESTINATION lib/pkgconfig)
 # Find the QtWidgets library
 find_package(Qt5Core)
 
-set(CMAKE_CXX_FLAGS "-Wall -g -std=c++11")
+set(CMAKE_CXX_FLAGS "-Wall -g -std=c++0x")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
