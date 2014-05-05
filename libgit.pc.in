@@ -1,0 +1,9 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libgit
+Description: libgit library
+Version: 0.0.1
+Libs: -llibgit -L${libdir}
+Cflags: -I${includedir}
