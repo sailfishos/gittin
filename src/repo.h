@@ -69,10 +69,10 @@ public:
     void reset(ResetOptions options, const QString &object = QString());
     void clean(CleanOptions options, const QString &path = QString());
 
-    void checkout(const Commit &commit, CheckoutOptions options);
-    void checkout(const Branch &branch, CheckoutOptions options);
-    void checkout(const Tag &tag, CheckoutOptions options);
-    void checkout(const QString &object, CheckoutOptions options);
+    void checkout(const Commit &commit, CheckoutOptions options = CheckoutOptions::None);
+    void checkout(const Branch &branch, CheckoutOptions options = CheckoutOptions::None);
+    void checkout(const Tag &tag, CheckoutOptions options = CheckoutOptions::None);
+    void checkout(const QString &object, CheckoutOptions options = CheckoutOptions::None);
 
     QByteArray hashObject(const QString &path) const;
 
