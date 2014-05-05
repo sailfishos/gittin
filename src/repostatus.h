@@ -37,6 +37,7 @@ public:
 
     RepoStatus &operator=(const RepoStatus &other);
 
+    bool isClean() const;
     bool hasStagedFiles() const;
     bool hasDirtyFiles() const;
     bool hasUntrackedFiles() const;

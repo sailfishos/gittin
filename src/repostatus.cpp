@@ -76,6 +76,11 @@ RepoStatus &RepoStatus::operator=(const RepoStatus &other)
     return *this;
 }
 
+bool RepoStatus::isClean() const
+{
+    return !hasStagedFiles() && !hasDirtyFiles() && !hasUntrackedFiles();
+}
+
 bool RepoStatus::hasStagedFiles() const
 {
     return !d->stagedFiles.isEmpty();
