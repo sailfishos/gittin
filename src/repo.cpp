@@ -149,9 +149,9 @@ Tag Repo::tag(const QString &name)
     return Tag(this, name);
 }
 
-RepoStatus Repo::status() const
+RepoStatus Repo::status(const QString &path) const
 {
-    return RepoStatus(basicCmd("status", QStringList() << "-z"));
+    return RepoStatus(basicCmd("status", QStringList() << "-z" << (path.isEmpty() ? "." : path)));
 }
 
 QList<Tag> Repo::tags() const

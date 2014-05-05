@@ -81,7 +81,7 @@ public:
     Commit commit(const QString &message);
     Tag tag(const QString &name);
 
-    RepoStatus status() const;
+    RepoStatus status(const QString &path = QString()) const;
     QList<Tag> tags() const;
 
     QString configValue(const QString &name, const QString &defaultValue = QString()) const;
