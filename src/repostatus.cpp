@@ -36,6 +36,9 @@ public:
         QList<QByteArray> files(data.split('\0'));
 
         foreach (QByteArray file, files) {
+            if (file.isEmpty()) {
+                continue;
+            }
             char x = file[0];
             char y = file[1];
             QByteArray fileName = file.mid(2);
