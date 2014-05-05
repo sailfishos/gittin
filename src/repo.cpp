@@ -84,7 +84,7 @@ void Repo::reset(ResetOptions options, const QString &object)
 {
     QStringList opts;
     if (options & ResetOptions::Hard) opts << "--hard";
-    opts << object;
+    if (!object.isEmpty()) opts << object;
     basicCmd("reset", opts);
 }
 
