@@ -126,9 +126,12 @@ QByteArray Repo::hashObject(const QString &path) const
     return basicCmd("hash-object", QStringList() << path).left(40); //strip the newline
 }
 
-void Repo::add(const QString &file)
+void Repo::add(const QString &file, AddOptions options)
 {
-    basicCmd("add", QStringList() << file);
+    QStringList opts;
+    if (options & AddOptions::All) opts << "-A";
+    opts << file;
+    basicCmd("add", opts);
 }
 
 void Repo::rm(const QString &file)

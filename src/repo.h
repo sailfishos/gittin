@@ -55,6 +55,12 @@ enum class CheckoutOptions
     Force = 1
 };
 
+enum class AddOptions
+{
+    None = 0,
+    All = 1
+};
+
 class Repo
 {
 public:
@@ -76,7 +82,7 @@ public:
 
     QByteArray hashObject(const QString &path) const;
 
-    void add(const QString &file);
+    void add(const QString &file, AddOptions options = AddOptions::None);
     void rm(const QString &file);
     Commit commit(const QString &message);
     Tag tag(const QString &name);
@@ -103,6 +109,7 @@ inline Flags operator|(Flags a, Flags b) { return (Flags)((int)a | (int)b); }
 DECLARE_FLAGS(CleanOptions)
 DECLARE_FLAGS(ResetOptions)
 DECLARE_FLAGS(CheckoutOptions)
+DECLARE_FLAGS(AddOptions)
 
 }
 
