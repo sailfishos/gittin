@@ -50,12 +50,14 @@ public:
             } else {
                 dirtyFiles << fileName;
             }
+            this->files.append({ x, y, fileName });
         }
     }
 
     QStringList stagedFiles;
     QStringList dirtyFiles;
     QStringList untrackedFiles;
+    QList<RepoStatus::File> files;
 };
 
 RepoStatus::RepoStatus(const QByteArray &data)
@@ -112,6 +114,11 @@ QStringList RepoStatus::dirtyFiles() const
 QStringList RepoStatus::untrackedFiles() const
 {
     return d->untrackedFiles;
+}
+
+QList<RepoStatus::File> RepoStatus::files() const
+{
+    return d->files;
 }
 
 }

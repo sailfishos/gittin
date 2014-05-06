@@ -46,6 +46,13 @@ public:
     QStringList dirtyFiles() const;
     QStringList untrackedFiles() const;
 
+    struct File {
+        char index;
+        char workTree;
+        QString file;
+    };
+    QList<File> files() const;
+
 private:
     RepoStatus(const QByteArray &data);
 
