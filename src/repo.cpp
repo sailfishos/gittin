@@ -130,6 +130,7 @@ void Repo::add(const QString &file, AddOptions options)
 {
     QStringList opts;
     if (options & AddOptions::All) opts << "-A";
+    if (options & AddOptions::Update) opts << "-u";
     opts << file;
     basicCmd("add", opts);
 }

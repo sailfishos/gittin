@@ -58,7 +58,8 @@ enum class CheckoutOptions
 enum class AddOptions
 {
     None = 0,
-    All = 1
+    All = 1,
+    Update = 2
 };
 
 class Repo
