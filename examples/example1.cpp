@@ -23,10 +23,10 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#include "src/repo.h"
-#include "src/repostatus.h"
-#include "src/branch.h"
-#include "src/commit.h"
+#include "src/repo.hpp"
+#include "src/repostatus.hpp"
+#include "src/branch.hpp"
+#include "src/commit.hpp"
 
 int main(int argv, char **argc)
 {

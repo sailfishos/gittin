@@ -24,11 +24,11 @@
 #include <QDebug>
 #include <QSharedPointer>
 
-#include "repo.h"
-#include "repostatus.h"
-#include "commit.h"
-#include "command.h"
-#include "branch.h"
+#include "repo.hpp"
+#include "repostatus.hpp"
+#include "commit.hpp"
+#include "command.hpp"
+#include "branch.hpp"
 
 namespace LibGit {
 

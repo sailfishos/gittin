@@ -24,10 +24,10 @@
 #include <QString>
 #include <QSharedPointer>
 
-#include "branch.h"
-#include "commit.h"
-#include "repo.h"
-#include "command.h"
+#include "branch.hpp"
+#include "commit.hpp"
+#include "repo.hpp"
+#include "command.hpp"
 
 namespace LibGit
 {

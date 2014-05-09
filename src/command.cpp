@@ -22,7 +22,7 @@
 
 #include <QProcess>
 
-#include "command.h"
+#include "command.hpp"
 
 namespace LibGit
 {

@@ -20,7 +20,7 @@
  * http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  */
 
-#include "tag.h"
+#include "tag.hpp"
 
 #include <QSharedData>
 #include <QString>

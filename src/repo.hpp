@@ -25,7 +25,7 @@
 
 #include <QStringList>
 
-#include "tag.h"
+#include "tag.hpp"
 
 namespace LibGit {
 

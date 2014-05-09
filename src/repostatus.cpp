@@ -24,7 +24,7 @@
 #include <QStringList>
 #include <QDebug>
 
-#include "repostatus.h"
+#include "repostatus.hpp"
 
 namespace LibGit {
 

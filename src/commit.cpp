@@ -25,9 +25,9 @@
 #include <QDebug>
 #include <QSharedPointer>
 
-#include "commit.h"
-#include "command.h"
-#include "repo.h"
+#include "commit.hpp"
+#include "command.hpp"
+#include "repo.hpp"
 
 namespace LibGit
 {
