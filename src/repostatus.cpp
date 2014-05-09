@@ -41,7 +41,7 @@ public:
             }
             char x = file[0];
             char y = file[1];
-            QByteArray fileName = file.mid(2);
+            QByteArray fileName = file.mid(3);
 
             if (x == '?' && y == '?') {
                 untrackedFiles << fileName;
