@@ -2,11 +2,24 @@
 project(libgit)
 cmake_minimum_required(VERSION 2.8)
 
+option(ENABLE_MULTIARCH "Enable support for multi-arch distros (lib64)" OFF)
+IF(ENABLE_MULTIARCH)
+  IF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    SET(LIB_SUFFIX "")
+  ELSE(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    SET(LIB_SUFFIX 64)
+  ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
+ELSE()
+  SET(LIB_SUFFIX "")
+ENDIF()
+message(STATUS "Multiarch support is ${ENABLE_MULTIARCH}")
+set(DST_LIB lib${LIB_SUFFIX})
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 configure_file(libgit.pc.in libgit.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libgit.pc DESTINATION lib/pkgconfig)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libgit.pc DESTINATION ${DST_LIB}/pkgconfig)
 
 # Find the QtWidgets library
 find_package(Qt5Core)
