@@ -21,7 +21,10 @@
  */
 
 #include "tag.hpp"
+#include "repo.hpp"
+#include "command.hpp"
 
+#include <QSharedPointer>
 #include <QSharedData>
 #include <QString>
 #include <QDebug>
@@ -72,6 +75,11 @@ Tag &Tag::operator=(const Tag &other)
 QString Tag::name() const
 {
     return d->name;
+}
+
+void Tag::destroy()
+{
+    d->repo->command("tag", { "-d", d->name });
 }
 
 

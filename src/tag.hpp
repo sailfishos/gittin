@@ -44,6 +44,8 @@ public:
 
     QString name() const;
 
+    void destroy();
+
 private:
     QSharedDataPointer<TagPrivate> d;
 };
