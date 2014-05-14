@@ -10,9 +10,9 @@ set(sources
     command.cpp
 )
 
-add_library(libgit SHARED ${sources})
-qt5_use_modules(libgit Core)
+add_library(gittin SHARED ${sources})
+qt5_use_modules(gittin Core)
 
-install(TARGETS liggit LIBRARY DESTINATION ${DST_LIB})
+install(TARGETS gittin LIBRARY DESTINATION ${DST_LIB})
 file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp")
-install(FILES ${headers} DESTINATION include/libgit)
+install(FILES ${headers} DESTINATION include/gittin)
