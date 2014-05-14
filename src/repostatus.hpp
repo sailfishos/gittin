@@ -25,7 +25,7 @@
 
 #include <QSharedDataPointer>
 
-namespace LibGit {
+namespace Gittin {
 
 class RepoStatusPrivate;
 

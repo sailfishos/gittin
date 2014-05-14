@@ -30,7 +30,7 @@
 #include "command.hpp"
 #include "branch.hpp"
 
-namespace LibGit {
+namespace Gittin {
 
 class RepoPrivate
 {

@@ -25,7 +25,7 @@
 
 class QProcess;
 
-namespace LibGit
+namespace Gittin
 {
 
 class Command

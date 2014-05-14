@@ -27,7 +27,7 @@
 
 #include "tag.hpp"
 
-namespace LibGit {
+namespace Gittin {
 
 class RepoStatus;
 class Commit;

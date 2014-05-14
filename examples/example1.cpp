@@ -32,23 +32,23 @@ int main(int argv, char **argc)
 {
     QCoreApplication app(argv, argc);
 
-    LibGit::Repo repo(".");
+    Gittin::Repo repo(".");
 
     QString action = app.arguments().size() > 1 ? app.arguments().at(1) : QString();
     if (action == QLatin1String("init")) {
         repo.init();
     } else if (action == QLatin1String("status")) {
-        LibGit::RepoStatus status = repo.status();
+        Gittin::RepoStatus status = repo.status();
         qDebug()<<"untracked:" << status.untrackedFiles();
         qDebug()<<"staged:" << status.stagedFiles();
         qDebug()<<"dirty" << status.dirtyFiles();
     } else if (action == QLatin1String("show_tags")) {
         qDebug() << repo.tags();
     } else if (action == QLatin1String("check_branch")) {
-        LibGit::Branch branch(&repo, app.arguments().at(2));
+        Gittin::Branch branch(&repo, app.arguments().at(2));
         qDebug() << branch.exists();
     } else if (action == QLatin1String("commit")) {
-        LibGit::Branch branch(&repo, app.arguments().at(2));
+        Gittin::Branch branch(&repo, app.arguments().at(2));
         qDebug() << branch.head(app.arguments().at(3).toInt());
     } else if (action == QLatin1String("hash-object")) {
         qDebug() << repo.hashObject(app.arguments().at(2));

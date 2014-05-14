@@ -29,7 +29,7 @@
 #include "command.hpp"
 #include "repo.hpp"
 
-namespace LibGit
+namespace Gittin
 {
 
 class CommitPrivate : public QSharedData

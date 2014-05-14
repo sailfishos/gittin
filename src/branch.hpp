@@ -27,7 +27,7 @@
 
 class QString;
 
-namespace LibGit
+namespace Gittin
 {
 
 class Repo;

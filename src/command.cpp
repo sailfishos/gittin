@@ -24,7 +24,7 @@
 
 #include "command.hpp"
 
-namespace LibGit
+namespace Gittin
 {
 
 class CommandPrivate

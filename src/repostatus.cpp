@@ -26,7 +26,7 @@
 
 #include "repostatus.hpp"
 
-namespace LibGit {
+namespace Gittin {
 
 class RepoStatusPrivate : public QSharedData
 {

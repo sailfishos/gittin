@@ -29,7 +29,7 @@
 #include <QString>
 #include <QDebug>
 
-namespace LibGit
+namespace Gittin
 {
 
 class TagPrivate : public QSharedData
