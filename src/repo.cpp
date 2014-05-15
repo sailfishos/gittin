@@ -36,16 +36,13 @@ class RepoPrivate
 {
 public:
     RepoPrivate()
-        : process(new QProcess)
     {
     }
 
     ~RepoPrivate()
     {
-        delete process;
     }
 
-    QProcess *process;
     QString path;
 };
 
@@ -55,8 +52,6 @@ Repo::Repo(const QString &path)
     : d(new RepoPrivate)
 {
     d->path = path;
-    d->process->setWorkingDirectory(path);
-    d->process->setProcessChannelMode(QProcess::ForwardedErrorChannel);
 }
 
 Repo::~Repo()
@@ -203,11 +198,8 @@ QSharedPointer<Command> Repo::command(const QString &cmd, const QStringList &par
 
 QByteArray Repo::basicCmd(const QString &cmd, const QStringList &params) const
 {
-    d->process->start(QLatin1String("git"), QStringList() << cmd << params);
     qDebug()<<"executing" << QLatin1String("git") << (QStringList() << cmd << params);
-    d->process->waitForFinished();
-    QByteArray output = d->process->readAllStandardOutput();
-    return output;
+    return command(cmd, params)->stdout();
 }
 
 }
