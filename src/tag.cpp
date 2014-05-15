@@ -77,6 +77,11 @@ QString Tag::name() const
     return d->name;
 }
 
+QString Tag::notes() const
+{
+    return d->repo->command("notes", { "show", d->name })->stdout();
+}
+
 void Tag::destroy()
 {
     d->repo->command("tag", { "-d", d->name });

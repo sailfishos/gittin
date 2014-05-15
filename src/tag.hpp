@@ -43,6 +43,7 @@ public:
     Tag &operator=(const Tag &other);
 
     QString name() const;
+    QString notes() const;
 
     void destroy();
 
