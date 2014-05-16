@@ -42,7 +42,8 @@ public:
     }
 
     TagPrivate(const TagPrivate &o)
-        : name(o.name)
+        : repo(o.repo)
+        , name(o.name)
     {
     }
 
