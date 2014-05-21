@@ -186,7 +186,6 @@ QSharedPointer<Command> Repo::command(const QString &cmd, const QStringList &par
 {
     QProcess *proc = new QProcess;
     proc->setWorkingDirectory(d->path);
-    proc->setProcessChannelMode(QProcess::ForwardedErrorChannel);
     proc->setProgram("git");
     proc->setArguments(QStringList() << cmd << params);
 
