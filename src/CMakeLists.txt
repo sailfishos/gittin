@@ -1,6 +1,3 @@
-
-find_package(Qt5Core)
-
 set(sources
     repo.cpp
     repostatus.cpp
