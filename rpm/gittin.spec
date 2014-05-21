@@ -7,7 +7,9 @@ License: LGPL21
 Group: Development/Liraries
 URL: https://git.jollamobile.com/vault/gittin
 Source0: %{name}-%{version}.tar.bz2
-BuildRequires: cmake >= 2.8
+BuildRequires: cmake >= 2.8.9
+BuildRequires: pkgconfig(Qt5Core)
+Requires: git-minimal >= 1.7
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
