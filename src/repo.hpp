@@ -24,8 +24,11 @@
 #define REPO_H
 
 #include <QStringList>
+#include <QSharedPointer>
 
 #include "tag.hpp"
+
+class QUrl;
 
 namespace Gittin {
 
