@@ -1,5 +1,6 @@
 project(gittin)
 cmake_minimum_required(VERSION 2.8.9)
+include(CMakeParseArguments)
 
 option(ENABLE_MULTIARCH "Enable support for multi-arch distros (lib64)" OFF)
 IF(ENABLE_MULTIARCH)
