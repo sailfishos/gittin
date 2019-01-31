@@ -1,8 +1,8 @@
 
 Summary: A library to hangle Git repositories
 Name: gittin
-Version: 0.1.0
-Release: 1
+Version: 0.1.3
+Release: 2
 License: LGPLv2.1
 Group: Development/Libraries
 URL: https://git.jollamobile.com/vault/gittin
