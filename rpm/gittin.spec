@@ -3,9 +3,9 @@ Summary: A library to hangle Git repositories
 Name: gittin
 Version: 0.1.3
 Release: 2
-License: LGPLv2.1
+License: LGPLv2
 Group: Development/Libraries
-URL: https://git.jollamobile.com/vault/gittin
+URL:   https://git.sailfishos.org/mer-core/gittin
 Source0: %{name}-%{version}.tar.bz2
 BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(Qt5Core)
